@@ -6,18 +6,20 @@ namespace SlaptazodziuSistema
 {
     public partial class Main : Form
     {
+        String Path = FunctionManager.Path;
+        String Key = FunctionManager.Key;
         public Main()
         {
             InitializeComponent();
 
-            if (File.Exists(FunctionManager.Path))
+            if (File.Exists(Path))
             {
-                FunctionManager.DecryptFile(FunctionManager.Path, FunctionManager.Key);
+                FunctionManager.DecryptFile(Path, Key);
             }
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FunctionManager.EncryptFile(FunctionManager.Path, FunctionManager.Key);
+            FunctionManager.EncryptFile(Path, Key);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -42,6 +44,11 @@ namespace SlaptazodziuSistema
         {
             DeleteForm deleteForm = new DeleteForm();
             deleteForm.ShowDialog();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

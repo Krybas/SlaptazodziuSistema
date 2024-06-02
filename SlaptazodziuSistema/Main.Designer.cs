@@ -112,6 +112,7 @@
             Name = "Main";
             Text = "Main";
             FormClosing += Form1_FormClosing;
+            Load += Main_Load;
             ResumeLayout(false);
             PerformLayout();
         }
