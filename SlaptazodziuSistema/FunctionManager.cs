@@ -32,16 +32,19 @@ namespace SlaptazodziuSistema
         public static void UpdatePassword(string name, string newPassword)
         {
             if (!File.Exists(filePath)) return;
+
             var lines = File.ReadAllLines(filePath);
             var updatedLines = lines.Select(line =>
             {
-                if (line.Split(':')[0] == name)
+                var parts = line.Split(':');
+                if (parts[0] == name)
                 {
                     var encryptedPassword = EncryptString(newPassword, encryptionKey);
-                    return $"{name}:{encryptedPassword}";
+                    return $"{parts[0]}:{encryptedPassword}:{parts[2]}:{parts[3]}";
                 }
                 return line;
-            });
+            }).ToArray();
+
             File.WriteAllLines(filePath, updatedLines);
         }
         public static void DeletePassword(string name)
